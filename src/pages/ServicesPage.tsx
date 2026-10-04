@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PESTS_DATA } from '../data/pests';
-import { PestInfo } from '../types';
+import { PestInfo, PageRoute } from '../types';
 import {
   Shield,
   Home,
@@ -18,9 +18,10 @@ import { BugManLogo } from '../components/BugManLogo';
 
 interface ServicesPageProps {
   onOpenQuoteModal: (defaultPest?: string) => void;
+  onNavigate?: (page: PageRoute) => void;
 }
 
-export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal }) => {
+export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal, onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedPest, setSelectedPest] = useState<PestInfo | null>(null);
@@ -51,7 +52,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenQuoteModal }) 
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <button
-              onClick={() => onOpenQuoteModal()}
+              onClick={() => onNavigate ? onNavigate('contact') : onOpenQuoteModal()}
               className="px-6 py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-xl text-xs uppercase tracking-wider font-heading shadow-md transition-colors"
             >
               Request Free Property Inspection

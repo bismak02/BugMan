@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) => {
-  const facebookUrl = 'https://www.facebook.com/';
+  const facebookUrl = 'https://www.facebook.com/profile.php?id=61577192401199&sk=followers';
 
   return (
     <footer className="bg-[#121316] text-[#cbced2] border-t border-[#23272e]">
@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
               <span>(410) 635-1055</span>
             </a>
             <button
-              onClick={onOpenQuoteModal}
+              onClick={() => onNavigate('contact')}
               className="px-6 py-3.5 bg-[#1e2025] hover:bg-[#2a2d34] text-white font-bold rounded-lg transition-colors text-sm border border-[#393d47] uppercase tracking-wider font-heading"
             >
               Request Free Estimate
@@ -63,10 +63,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
                 <span>Fully Licensed, Certified &amp; Insured</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                <span>100% Satisfaction Guaranteed</span>
               </div>
             </div>
 
@@ -234,18 +230,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
         <div className="mt-12 pt-8 border-t border-[#23272e] text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
             © Copyright 2024 BugMan Pest Control. <span className="font-semibold text-slate-300">ALL RIGHTS RESERVED.</span> | MDA #: 34000
-          </p>
-
-          <p className="flex items-center gap-2">
-            <span>Created by</span>
-            <a
-              href="https://www.bismakhan.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#c59b56] hover:text-[#d4b27d] font-semibold underline transition-colors"
-            >
-              Bisma Khan
-            </a>
           </p>
         </div>
       </div>

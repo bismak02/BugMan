@@ -70,8 +70,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               </span>
               <span aria-hidden="true" className="text-slate-600">·</span>
               <span>Licensed MDA #34000</span>
-              <span aria-hidden="true" className="text-slate-600">·</span>
-              <span className="text-[#dcbfa2]">100% Guaranteed Results</span>
             </div>
 
             {/* Main Heading (Authentic copy) */}
@@ -96,32 +94,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               </a>
 
               <button
-                onClick={() => onOpenQuoteModal()}
+                onClick={() => onNavigate('contact')}
                 className="px-7 py-4 bg-[#1e2025]/90 hover:bg-[#2b2e36] text-white font-bold rounded-xl text-base uppercase tracking-wider font-heading border border-[#3b3f49] backdrop-blur-md transition-all flex items-center justify-center gap-2"
               >
                 <Calendar className="w-5 h-5 text-[#c59b56]" />
                 <span>Request Free Inspection</span>
               </button>
-            </div>
-
-            {/* Trust Indicators Checklist */}
-            <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300 font-medium border-t border-[#252830]">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                <span>Same-Day Response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                <span>Eco &amp; Pet Friendly</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                <span>Certified Techs</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                <span>No Long Contracts</span>
-              </div>
             </div>
           </div>
         </div>
@@ -132,7 +110,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs uppercase font-bold tracking-widest text-[#8c6731] font-heading">
-              Simple &amp; Guaranteed
+              Simple &amp; Effective
             </span>
             <h2 className="text-3xl sm:text-4xl font-black font-heading uppercase text-[#121316] tracking-tight mt-1">
               How Do I Get Rid of Pests in My Area?
@@ -220,7 +198,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               >
                 <div className="overflow-hidden rounded-2xl relative">
                   <img
-                    src="/src/assets/images/october_monthly_promo_flyer_1791093503918.jpg"
+                    src="/october.jpeg"
                     alt="BugMan October $1 Treatment Monthly Promo Flyer"
                     className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -297,7 +275,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </button>
 
                 <a
-                  href="https://www.facebook.com/"
+                  href="https://www.facebook.com/profile.php?id=61577192401199&sk=followers"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-5 py-3.5 bg-[#1877F2] hover:bg-[#0c63d4] text-white font-bold rounded-xl text-xs uppercase tracking-wider font-heading transition-colors flex items-center gap-2 shadow"
@@ -343,7 +321,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               {/* Action trigger */}
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() => onOpenQuoteModal()}
+                  onClick={() => onNavigate('contact')}
                   className="px-6 py-3 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading transition-colors"
                 >
                   Schedule Your Inspection
@@ -366,21 +344,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </div>
 
                 <span className="text-xs uppercase font-bold tracking-widest text-[#c59b56] font-heading">
-                  The BugMan Guarantee
+                  Local &amp; Certified
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black font-heading uppercase tracking-tight text-white mt-1 mb-6">
                   Why Choose BugMan Pest Control?
                 </h3>
 
-                {/* Verbatim 4 bullets from original site */}
+                {/* Verbatim bullets from original site */}
                 <ul className="space-y-4 text-sm sm:text-base font-semibold">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[#c59b56] shrink-0 mt-0.5" />
                     <span>Great Service Near You</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-[#c59b56] shrink-0 mt-0.5" />
-                    <span>100% Satisfaction Guaranteed</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[#c59b56] shrink-0 mt-0.5" />
@@ -395,23 +369,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 <div className="mt-8 pt-6 border-t border-[#23272e] flex items-center justify-between text-xs text-slate-400">
                   <span>Maryland Dept. of Ag. MDA #34000</span>
                   <BadgeCheck className="w-5 h-5 text-[#c59b56]" />
-                </div>
-              </div>
-
-              {/* Service Details Card with inspection photo */}
-              <div className="bg-[#faf8f5] border border-[#e8e2d5] rounded-2xl p-5 flex items-center gap-4">
-                <img
-                  src="/src/assets/images/pest_inspection_detail_1791092766977.jpg"
-                  alt="Certified technician inspecting property"
-                  className="w-24 h-24 rounded-xl object-cover shrink-0"
-                />
-                <div>
-                  <h4 className="font-heading font-bold text-[#121316] uppercase text-sm">
-                    Residential &amp; Commercial Plans
-                  </h4>
-                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                    Customized exterior defense barriers and interior targeted baiting for homes, restaurants, warehouses, and offices.
-                  </p>
                 </div>
               </div>
             </div>
@@ -493,11 +450,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                     {pest.name}
                   </h4>
                 </div>
-
-                <div className="mt-3 pt-2 border-t border-[#f0ece3] flex items-center justify-between text-[11px] text-[#8c6731] font-bold">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
               </div>
             ))}
           </div>
@@ -575,30 +527,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </div>
               </div>
             ))}
-
-            {/* Special 6th Card: Annual Home Protection Plan (HPP) */}
-            <div className="p-6 bg-[#121316] text-white rounded-2xl border border-[#2d313b] shadow-md flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-[#c59b56] uppercase tracking-wider font-heading">
-                  Ultimate Peace of Mind
-                </span>
-                <h3 className="text-lg font-bold font-heading uppercase text-white mt-1 mb-2">
-                  BugMan Home Protection Plan (HPP)
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Scheduled quarterly exterior perimeter barriers, foundation defense, de-webbing, and unlimited free re-treatments whenever needed.
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-[#23272e]">
-                <button
-                  onClick={() => onOpenQuoteModal('General Prevention (Home Protection Plan)')}
-                  className="w-full py-2.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] text-xs font-black rounded-lg uppercase tracking-wider font-heading transition-colors"
-                >
-                  Explore Protection Plan
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -637,9 +565,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 >
                   Browse Merch Store →
                 </button>
-                <span className="text-xs text-slate-400 font-medium">
-                  Free standard shipping on gear orders over $50!
-                </span>
               </div>
             </div>
           </div>

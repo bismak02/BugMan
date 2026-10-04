@@ -41,10 +41,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   if (!isOpen) return null;
 
   const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const freeShippingThreshold = 50.0;
-  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
   const discountAmount = (subtotal * discountPercent) / 100;
-  const shippingFee = subtotal >= freeShippingThreshold || subtotal === 0 ? 0 : 5.99;
+  const shippingFee = subtotal > 0 ? 5.99 : 0;
   const total = Math.max(0, subtotal - discountAmount + shippingFee);
 
   const applyPromo = (e: React.FormEvent) => {
@@ -101,28 +99,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             >
               <X className="w-5 h-5" />
             </button>
-          </div>
-
-          {/* Shipping Progress Tracker */}
-          <div className="px-6 py-3 bg-[#f5eddc] border-b border-[#e8d7b3] text-xs">
-            {remainingForFreeShipping > 0 ? (
-              <div>
-                <p className="text-slate-800">
-                  Add <strong className="text-[#8c6731] font-bold">${remainingForFreeShipping.toFixed(2)}</strong> more to get <span className="font-bold text-[#8c6731]">FREE Shipping</span>!
-                </p>
-                <div className="w-full bg-[#e8d7b3] h-1.5 rounded-full mt-1.5 overflow-hidden">
-                  <div
-                    className="bg-[#c59b56] h-full rounded-full transition-all duration-300"
-                    style={{ width: `${Math.min(100, (subtotal / freeShippingThreshold) * 100)}%` }}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center gap-1.5 text-[#8c6731] font-bold">
-                <CheckCircle2 className="w-4 h-4 text-[#c59b56]" />
-                <span>You unlocked FREE standard shipping on this order!</span>
-              </div>
-            )}
           </div>
 
           {/* Order Completion Screen */}
@@ -297,7 +273,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                 <div className="p-3 bg-[#f5eddc] border border-[#e8d7b3] rounded-lg text-[#6b4d24] text-[11px] flex items-center gap-2 mt-4">
                   <ShieldCheck className="w-4 h-4 text-[#8c6731] shrink-0" />
-                  <span>Secure 256-bit encrypted checkout. Satisfaction guaranteed.</span>
+                  <span>Secure 256-bit encrypted checkout.</span>
                 </div>
 
                 <div className="pt-3 border-t border-[#e8e2d5] flex justify-between items-center text-sm font-bold text-[#121316]">

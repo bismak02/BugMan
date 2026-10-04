@@ -107,10 +107,6 @@ export const MerchPage: React.FC<MerchPageProps> = ({ onAddToCart, onOpenCart })
             {/* Quick perk badges */}
             <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-300">
               <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#c59b56]" />
-                <span>Free shipping on orders over $50</span>
-              </div>
-              <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-[#c59b56]" />
                 <span>Premium heavyweight materials</span>
               </div>

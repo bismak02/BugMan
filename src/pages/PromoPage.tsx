@@ -41,7 +41,7 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
     setClaimed(true);
   };
 
-  const facebookUrl = 'https://www.facebook.com/';
+  const facebookUrl = 'https://www.facebook.com/profile.php?id=61577192401199&sk=followers';
 
   return (
     <div className="bg-[#faf8f5] min-h-screen pb-24">
@@ -59,7 +59,7 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
               <X className="w-5 h-5" />
             </button>
             <img
-              src="/src/assets/images/october_monthly_promo_flyer_1791093503918.jpg"
+              src="/october.jpeg"
               alt="BugMan October $1 Treatment Monthly Promo Flyer"
               className="w-full h-auto object-contain max-h-[85vh] rounded-2xl"
             />
@@ -131,7 +131,7 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
                 className="relative overflow-hidden rounded-2xl cursor-zoom-in bg-slate-950"
               >
                 <img
-                  src="/src/assets/images/october_monthly_promo_flyer_1791093503918.jpg"
+                  src="/october.jpeg"
                   alt="Official BugMan Monthly Promo Flyer - October $1 Treatment"
                   className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
                 />
@@ -372,7 +372,7 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
 
                   <div className="p-3 bg-[#f5eddc] border border-[#e8d7b3] rounded-xl text-[11px] text-[#6b4d24]">
                     <span className="font-bold">Deal Terms: </span>
-                    First treatment is $1 when enrolling in our Year-Round Home Protection Plan. No hidden fees. Cancel anytime satisfaction guarantee.
+                    First treatment is $1 when enrolling in our Year-Round Home Protection Plan. No hidden fees. Cancel anytime.
                   </div>
 
                   <button

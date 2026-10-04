@@ -149,7 +149,10 @@ export default function App() {
         )}
 
         {currentPage === 'services' && (
-          <ServicesPage onOpenQuoteModal={handleOpenQuoteModal} />
+          <ServicesPage
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onNavigate={handleNavigate}
+          />
         )}
 
         {currentPage === 'promo' && (
@@ -199,11 +202,11 @@ export default function App() {
           <span>Call (410) 635-1055</span>
         </a>
         <button
-          onClick={() => handleOpenQuoteModal()}
+          onClick={() => handleNavigate('contact')}
           className="flex-1 py-2.5 px-3 bg-[#1e2025] active:bg-[#2b2e36] text-white font-bold rounded-lg text-xs uppercase tracking-wider font-heading flex items-center justify-center gap-1.5 border border-[#3b3f49]"
         >
           <Calendar className="w-3.5 h-3.5 text-[#c59b56]" />
-          <span>Free Estimate</span>
+          <span>Request Free Estimate</span>
         </button>
       </div>
     </div>
