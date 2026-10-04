@@ -5,7 +5,6 @@ import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
 import { QuoteModal } from './components/QuoteModal';
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './pages/ServicesPage';
 import { PromoPage } from './pages/PromoPage';
 import { ContactPage } from './pages/ContactPage';
 import { MerchPage } from './pages/MerchPage';
@@ -145,13 +144,6 @@ export default function App() {
           <HomePage
             onNavigate={handleNavigate}
             onOpenQuoteModal={handleOpenQuoteModal}
-          />
-        )}
-
-        {currentPage === 'services' && (
-          <ServicesPage
-            onOpenQuoteModal={handleOpenQuoteModal}
-            onNavigate={handleNavigate}
           />
         )}
 

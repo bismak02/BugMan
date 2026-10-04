@@ -31,9 +31,5 @@ export const FAQS_DATA: FAQItem[] = [
   {
     question: "How long do your products work?",
     answer: "For up to three months after the application, any bugs, insects, or other pests that come across the area will be exterminated. You can rest easy knowing we are controlling the bugs so you can focus on what matters most to you."
-  },
-  {
-    question: "Do your technicians need to come inside my house for each application?",
-    answer: "During your first service for our standard Home Protection Plan, we treat the inside of your home to help root out any pests inside. We won’t need to treat the inside of your home again unless you specifically request an inside service."
   }
 ];

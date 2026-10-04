@@ -12,7 +12,8 @@ import {
   Clock,
   Flame,
   ZoomIn,
-  X
+  X,
+  Mail
 } from 'lucide-react';
 import { BugManLogo } from '../components/BugManLogo';
 
@@ -31,15 +32,61 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
   });
 
   const [claimed, setClaimed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [claimCode, setClaimCode] = useState('');
+  const [timestamp, setTimestamp] = useState('');
   const [flyerZoom, setFlyerZoom] = useState(false);
 
-  const handleClaim = (e: React.FormEvent) => {
+  const handleClaim = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const code = `OCT-$1-${Math.floor(1000 + Math.random() * 9000)}`;
+    const timeStr = new Date().toLocaleString();
     setClaimCode(code);
-    setClaimed(true);
+    setTimestamp(timeStr);
+
+    try {
+      // 1. Record claim in browser localStorage
+      const existing = JSON.parse(localStorage.getItem('bugman_promo_claims') || '[]');
+      const newEntry = {
+        voucherCode: code,
+        timestamp: timeStr,
+        ...claimForm
+      };
+      localStorage.setItem('bugman_promo_claims', JSON.stringify([newEntry, ...existing]));
+
+      // 2. Transmit directly to bugmannpestcontrol@gmail.com
+      await fetch('https://formsubmit.co/ajax/bugmannpestcontrol@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New $1 Monthly Promo Claim [Voucher #${code}] - ${claimForm.name}`,
+          _template: 'table',
+          'Voucher Code': code,
+          'Date & Time': timeStr,
+          'Customer Name': claimForm.name,
+          'Phone Number': claimForm.phone,
+          'Email': claimForm.email,
+          'Street Address': claimForm.address,
+          'ZIP Code': claimForm.zip,
+          'Property Type': claimForm.propertyType,
+          'Promotion Applied': 'October $1 First Treatment Special'
+        })
+      });
+    } catch (err) {
+      console.warn('Promo claim dispatch notice:', err);
+    } finally {
+      setIsSubmitting(false);
+      setClaimed(true);
+    }
   };
+
+  const mailtoPromoBody = encodeURIComponent(
+    `Hello BugMan Pest Control,\n\nI have claimed the October $1 First Treatment Monthly Special on your website!\n\nVoucher Code: ${claimCode}\nName: ${claimForm.name}\nPhone: ${claimForm.phone}\nEmail: ${claimForm.email}\nAddress: ${claimForm.address}, ZIP: ${claimForm.zip}\nProperty Type: ${claimForm.propertyType}\n\nPlease call me to schedule my initial inspection!\n\nThank you!`
+  );
 
   const facebookUrl = 'https://www.facebook.com/profile.php?id=61577192401199&sk=followers';
 
@@ -247,20 +294,64 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
                   <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
                     Congratulations, <strong>{claimForm.name}</strong>! Your October $1 Treatment voucher has been reserved for <strong>{claimForm.address || 'your property'}</strong>.
                   </p>
-                  <p className="text-xs font-semibold text-slate-800 mt-3">
-                    Our team will call you at <strong>{claimForm.phone}</strong> today to schedule your first visit!
+                  <p className="text-xs text-slate-500 mt-1">
+                    Recorded at {timestamp}
                   </p>
 
-                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  {/* Summary of Claim Details */}
+                  <div className="mt-4 max-w-sm mx-auto bg-white border border-[#e8e2d5] rounded-xl p-3 text-left text-xs space-y-1 text-slate-700">
+                    <div className="flex justify-between border-b border-[#f0ece3] pb-1 font-bold text-[#121316]">
+                      <span>Promo Details:</span>
+                      <span className="text-[#8c6731]">Status: Logged</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Contact:</span>
+                      <span className="font-semibold">{claimForm.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Phone:</span>
+                      <a href={`tel:${claimForm.phone}`} className="font-semibold text-[#8c6731] hover:underline">
+                        {claimForm.phone}
+                      </a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Email:</span>
+                      <span className="font-semibold">{claimForm.email}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Address:</span>
+                      <span className="font-semibold">{claimForm.address}, {claimForm.zip}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                    <a
+                      href={`mailto:bugmannpestcontrol@gmail.com?subject=${encodeURIComponent(`October $1 Promo Claim [${claimCode}] - ${claimForm.name}`)}&body=${mailtoPromoBody}`}
+                      className="w-full sm:w-auto px-4 py-2.5 bg-[#121316] hover:bg-[#252830] text-white font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#c59b56]" />
+                      <span>Email a Copy</span>
+                    </a>
                     <a
                       href="tel:4106351055"
-                      className="w-full sm:w-auto px-5 py-2.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading transition-colors"
+                      className="w-full sm:w-auto px-4 py-2.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading transition-colors flex items-center justify-center gap-1.5"
                     >
-                      Call Dispatch (410) 635-1055
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Call (410) 635-1055</span>
                     </a>
                     <button
-                      onClick={() => setClaimed(false)}
-                      className="w-full sm:w-auto px-5 py-2.5 bg-[#efece4] text-[#121316] font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors hover:bg-[#e4ded2]"
+                      onClick={() => {
+                        setClaimed(false);
+                        setClaimForm({
+                          name: '',
+                          phone: '',
+                          email: '',
+                          address: '',
+                          zip: '21801',
+                          propertyType: 'Residential'
+                        });
+                      }}
+                      className="w-full sm:w-auto px-4 py-2.5 bg-[#efece4] text-[#121316] font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors hover:bg-[#e4ded2]"
                     >
                       Reset Form
                     </button>
@@ -370,16 +461,19 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
                     </div>
                   </div>
 
-                  <div className="p-3 bg-[#f5eddc] border border-[#e8d7b3] rounded-xl text-[11px] text-[#6b4d24]">
-                    <span className="font-bold">Deal Terms: </span>
-                    First treatment is $1 when enrolling in our Year-Round Home Protection Plan. No hidden fees. Cancel anytime.
-                  </div>
-
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] disabled:opacity-60 text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
                   >
-                    Claim $1 First Treatment Now
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-[#121316] border-t-transparent rounded-full animate-spin" />
+                        <span>Reserving $1 Treatment...</span>
+                      </>
+                    ) : (
+                      <span>Claim $1 First Treatment Now</span>
+                    )}
                   </button>
                 </form>
               )}

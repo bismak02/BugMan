@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, ShieldCheck, CheckCircle, Send, MessageSquare, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, CheckCircle, Send } from 'lucide-react';
 import { BugManLogo } from '../components/BugManLogo';
 
 export const ContactPage: React.FC = () => {
@@ -17,14 +17,62 @@ export const ContactPage: React.FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [ticketNum, setTicketNum] = useState('');
+  const [timestamp, setTimestamp] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const id = `BM-${Math.floor(1000 + Math.random() * 9000)}`;
+    const timeStr = new Date().toLocaleString();
     setTicketNum(id);
-    setSubmitted(true);
+    setTimestamp(timeStr);
+
+    try {
+      // 1. Save to local browser storage
+      const existing = JSON.parse(localStorage.getItem('bugman_contact_inquiries') || '[]');
+      const newEntry = {
+        id,
+        timestamp: timeStr,
+        ...formData
+      };
+      localStorage.setItem('bugman_contact_inquiries', JSON.stringify([newEntry, ...existing]));
+
+      // 2. Dispatch real email directly to bugmannpestcontrol@gmail.com via FormSubmit AJAX
+      await fetch('https://formsubmit.co/ajax/bugmannpestcontrol@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New BugMan Website Inquiry [Ticket #${id}] - ${formData.name}`,
+          _template: 'table',
+          'Ticket ID': id,
+          'Date & Time': timeStr,
+          'Customer Name': formData.name,
+          'Phone Number': formData.phone,
+          'Email': formData.email,
+          'City / ZIP': formData.city,
+          'Street Address': formData.address || 'N/A',
+          'Property Type': formData.propertyType,
+          'Pest Concern': formData.pestType,
+          'Urgency': formData.urgency,
+          'Customer Message': formData.message || 'No additional notes provided'
+        })
+      });
+    } catch (err) {
+      console.warn('Form dispatch notice:', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }
   };
+
+  const mailtoBody = encodeURIComponent(
+    `Hello BugMan Pest Control,\n\nI submitted an inquiry via your website (Ticket #${ticketNum}):\n\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nCity/ZIP: ${formData.city}\nAddress: ${formData.address || 'N/A'}\nProperty Type: ${formData.propertyType}\nPest Concern: ${formData.pestType}\nUrgency: ${formData.urgency}\n\nDetails:\n${formData.message || 'No additional notes.'}\n\nThank you!`
+  );
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-12 md:py-16">
@@ -37,9 +85,6 @@ export const ContactPage: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl font-black font-heading uppercase text-[#121316] tracking-tight mt-1">
             Contact BugMan Pest Control
           </h1>
-          <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-            Need an inspection, estimate, or immediate pest treatment? Speak with our friendly Eastern Shore dispatch team or submit a message below for a rapid response.
-          </p>
         </div>
 
         {/* Emergency Callout Strip in Deep Charcoal with Antique Gold Accent */}
@@ -52,9 +97,6 @@ export const ContactPage: React.FC = () => {
               <h3 className="text-lg font-bold font-heading uppercase tracking-wide text-white">
                 Need Immediate Emergency Pest Extermination?
               </h3>
-              <p className="text-xs text-slate-300">
-                Active wasps, hornets, bed bugs, or severe infestations receive immediate priority scheduling.
-              </p>
             </div>
           </div>
 
@@ -88,7 +130,7 @@ export const ContactPage: React.FC = () => {
                   <MapPin className="w-5 h-5 text-[#c59b56] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-[#121316] font-semibold mb-0.5">
-                      Main Office Address:
+                      Office Address:
                     </strong>
                     <span>12087 Somerset Avenue</span>
                     <br />
@@ -125,74 +167,6 @@ export const ContactPage: React.FC = () => {
                     </a>
                   </div>
                 </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-[#c59b56] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="block text-[#121316] font-semibold mb-0.5">
-                      Hours of Operation:
-                    </strong>
-                    <div className="text-xs space-y-0.5 text-slate-600">
-                      <div className="flex justify-between gap-4">
-                        <span>Monday – Friday:</span>
-                        <span className="font-semibold text-slate-900">7:00 AM – 7:00 PM</span>
-                      </div>
-                      <div className="flex justify-between gap-4">
-                        <span>Saturday:</span>
-                        <span className="font-semibold text-slate-900">8:00 AM – 4:00 PM</span>
-                      </div>
-                      <div className="flex justify-between gap-4">
-                        <span>Sunday &amp; Emergency:</span>
-                        <span className="font-semibold text-[#8c6731]">On-Call Priority</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Service Area Region Info */}
-            <div className="bg-[#121316] text-white p-6 sm:p-8 rounded-2xl shadow-md border border-[#2d313b]">
-              <h4 className="font-heading font-bold uppercase text-base text-white mb-2">
-                Counties &amp; Communities We Cover
-              </h4>
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                We deploy technician routes throughout Wicomico, Somerset, Worcester, and Dorchester counties every business day:
-              </p>
-
-              <div className="grid grid-cols-2 gap-2 text-xs text-slate-200">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Salisbury (21801, 21804)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Princess Anne (21853)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Fruitland (21826)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Berlin (21811)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Delmar (21875)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Ocean City (21842)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Crisfield (21817)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Cambridge (21613)</span>
-                </div>
               </div>
             </div>
           </div>
@@ -201,44 +175,104 @@ export const ContactPage: React.FC = () => {
           <div className="lg:col-span-7">
             <div className="bg-white p-6 sm:p-10 rounded-2xl border border-[#e8e2d5] shadow-xl">
               <div className="mb-6">
-                <span className="text-xs uppercase font-bold tracking-widest text-[#8c6731] font-heading">
-                  Quick Response Form
-                </span>
                 <h3 className="text-2xl font-bold font-heading uppercase text-[#121316] tracking-tight mt-1">
-                  Send an Inquiry or Schedule Online
+                  Send an Inquiry 
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Fill out the form below. We typically respond within 15–30 minutes during normal business hours.
+                  Fill out the form below.
                 </p>
               </div>
 
               {submitted ? (
-                <div className="py-12 text-center">
+                <div className="py-8 text-center">
                   <div className="w-16 h-16 bg-[#f4ecda] text-[#c59b56] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#c59b56]/40">
                     <CheckCircle className="w-10 h-10" />
                   </div>
                   <h4 className="text-2xl font-black font-heading uppercase text-[#121316]">
-                    Message Sent Successfully!
+                    Inquiry Received!
                   </h4>
                   <p className="text-sm font-semibold text-[#8c6731] mt-1">
-                    Ticket #{ticketNum}
+                    Confirmation Ticket #{ticketNum}
+                  </p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Recorded at {timestamp}
                   </p>
                   <p className="text-sm text-slate-600 mt-3 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong>{formData.name}</strong>. We have received your inquiry regarding <strong>{formData.pestType}</strong> at <strong>{formData.address || formData.city}</strong>. One of our pest specialists will contact you at <strong>{formData.phone}</strong>.
+                    Thank you, <strong>{formData.name}</strong>. Your inquiry regarding <strong>{formData.pestType}</strong> in <strong>{formData.city}</strong> has been logged.
                   </p>
 
-                  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  {/* Summary of submitted details */}
+                  <div className="mt-6 max-w-md mx-auto bg-[#faf8f5] border border-[#e8e2d5] rounded-xl p-4 text-left text-xs space-y-1.5 text-slate-700">
+                    <div className="flex justify-between border-b border-[#f0ece3] pb-1.5 mb-1.5 font-bold text-[#121316]">
+                      <span>Summary of Your Request:</span>
+                      <span className="text-[#8c6731]">Status: Logged</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Contact Name:</span>
+                      <span className="font-semibold text-slate-900">{formData.name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Phone:</span>
+                      <a href={`tel:${formData.phone}`} className="font-semibold text-[#8c6731] hover:underline">
+                        {formData.phone}
+                      </a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Email:</span>
+                      <span className="font-semibold text-slate-900">{formData.email}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Pest Concern:</span>
+                      <span className="font-semibold text-slate-900">{formData.pestType}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Urgency:</span>
+                      <span className="font-semibold text-slate-900">{formData.urgency}</span>
+                    </div>
+                    {formData.message && (
+                      <div className="pt-1.5 border-t border-[#f0ece3]">
+                        <span className="text-slate-500 block mb-0.5">Notes:</span>
+                        <p className="text-slate-800 italic bg-white p-2 rounded border border-[#e8e2d5]">
+                          "{formData.message}"
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                      href={`mailto:bugmannpestcontrol@gmail.com?subject=${encodeURIComponent(`Website Inquiry [Ticket #${ticketNum}] - ${formData.name}`)}&body=${mailtoBody}`}
+                      className="px-5 py-3 bg-[#121316] hover:bg-[#252830] text-white font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors flex items-center gap-2"
+                    >
+                      <Mail className="w-4 h-4 text-[#c59b56]" />
+                      <span>Email a Copy</span>
+                    </a>
                     <a
                       href="tel:4106351055"
-                      className="px-6 py-3 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading transition-colors"
+                      className="px-5 py-3 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading transition-colors flex items-center gap-1.5"
                     >
-                      Call (410) 635-1055
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Call (410) 635-1055</span>
                     </a>
                     <button
-                      onClick={() => setSubmitted(false)}
-                      className="px-6 py-3 bg-[#efece4] hover:bg-[#e4ded2] text-[#121316] font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({
+                          name: '',
+                          phone: '',
+                          email: '',
+                          address: '',
+                          city: 'Salisbury',
+                          zipCode: '',
+                          pestType: 'Ants',
+                          propertyType: 'Residential',
+                          urgency: 'Standard',
+                          message: ''
+                        });
+                      }}
+                      className="px-5 py-3 bg-[#efece4] hover:bg-[#e4ded2] text-[#121316] font-bold rounded-lg text-xs uppercase tracking-wider font-heading transition-colors"
                     >
-                      Send Another Message
+                      New Inquiry
                     </button>
                   </div>
                 </div>
@@ -351,8 +385,8 @@ export const ContactPage: React.FC = () => {
                         onChange={(e) => setFormData({ ...formData, urgency: e.target.value })}
                         className="w-full px-3 py-2.5 bg-white border border-[#d6cebf] rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#c59b56]"
                       >
-                        <option value="Standard">Standard (Within 24-48 hrs)</option>
-                        <option value="Same Day">Same-Day Priority</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Same Day">Urgent</option>
                         <option value="Flexible">Flexible Quote</option>
                       </select>
                     </div>
@@ -391,10 +425,20 @@ export const ContactPage: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] disabled:opacity-60 text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Send Message &amp; Request Inspection</span>
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-[#121316] border-t-transparent rounded-full animate-spin" />
+                        <span>Sending Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Message &amp; Request Inspection</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}

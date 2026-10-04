@@ -29,6 +29,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [referenceId, setReferenceId] = useState('');
 
   if (!isOpen) return null;
@@ -60,11 +61,44 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const ref = `BM-${Math.floor(10000 + Math.random() * 90000)}`;
+    const timeStr = new Date().toLocaleString();
     setReferenceId(ref);
-    setSubmitted(true);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/bugmannpestcontrol@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New BugMan Inspection Request [Ref #${ref}] - ${formData.fullName}`,
+          _template: 'table',
+          'Reference ID': ref,
+          'Date & Time': timeStr,
+          'Customer Name': formData.fullName,
+          'Phone': formData.phone,
+          'Email': formData.email,
+          'Street Address': formData.streetAddress || 'N/A',
+          'City': formData.city,
+          'ZIP Code': formData.zipCode,
+          'Property Type': formData.propertyType,
+          'Selected Pests': formData.selectedPests.join(', ') || 'General Inspection',
+          'Urgency': formData.urgency,
+          'Preferred Time': formData.preferredTime,
+          'Notes': formData.notes || 'None'
+        })
+      });
+    } catch (err) {
+      console.warn('Quote transmission notice:', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -354,9 +388,17 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg"
+                disabled={isSubmitting}
+                className="w-full py-3.5 bg-[#c59b56] hover:bg-[#b88b4a] disabled:opacity-60 text-[#121316] font-black rounded-lg text-sm uppercase tracking-wider font-heading shadow-md transition-all hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
               >
-                Submit Inspection Request
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-[#121316] border-t-transparent rounded-full animate-spin" />
+                    <span>Submitting Request...</span>
+                  </>
+                ) : (
+                  <span>Submit Inspection Request</span>
+                )}
               </button>
             </form>
           )}

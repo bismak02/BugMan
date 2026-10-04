@@ -1,4 +1,4 @@
-export type PageRoute = 'home' | 'services' | 'promo' | 'contact' | 'merch';
+export type PageRoute = 'home' | 'promo' | 'contact' | 'merch';
 
 export interface PestInfo {
   id: string;

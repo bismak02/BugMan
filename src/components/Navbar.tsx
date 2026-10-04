@@ -71,20 +71,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          <button
-            onClick={() => handleNavClick('services')}
-            className={`transition-colors py-1 relative whitespace-nowrap ${
-              currentPage === 'services'
-                ? 'text-[#c59b56] font-semibold'
-                : 'hover:text-[#c59b56]'
-            }`}
-          >
-            Services &amp; Pests
-            {currentPage === 'services' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c59b56] rounded-full" />
-            )}
-          </button>
-
           {/* Monthly Promo Link (Requested by user) */}
           <button
             onClick={() => handleNavClick('promo')}
@@ -106,16 +92,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => handleNavClick('merch')}
-            className={`transition-colors py-1 relative whitespace-nowrap flex items-center gap-1.5 ${
+            className={`transition-colors py-1 relative whitespace-nowrap ${
               currentPage === 'merch'
                 ? 'text-[#c59b56] font-semibold'
                 : 'hover:text-[#c59b56]'
             }`}
           >
             <span>Merch Store</span>
-            <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 bg-[#f5eddc] text-[#8c6731] border border-[#dcbfa2] rounded">
-              Store
-            </span>
             {currentPage === 'merch' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c59b56] rounded-full" />
             )}
@@ -179,16 +162,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               Home
             </button>
             <button
-              onClick={() => handleNavClick('services')}
-              className={`text-left px-3 py-2 text-base font-semibold rounded-lg ${
-                currentPage === 'services'
-                  ? 'bg-[#f4ecda] text-[#8c6731]'
-                  : 'text-[#1e2025] hover:bg-[#efece4]'
-              }`}
-            >
-              Services &amp; Pests We Treat
-            </button>
-            <button
               onClick={() => handleNavClick('promo')}
               className={`text-left px-3 py-2 text-base font-semibold rounded-lg flex items-center justify-between ${
                 currentPage === 'promo'
@@ -203,16 +176,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => handleNavClick('merch')}
-              className={`text-left px-3 py-2 text-base font-semibold rounded-lg flex items-center justify-between ${
+              className={`text-left px-3 py-2 text-base font-semibold rounded-lg ${
                 currentPage === 'merch'
                   ? 'bg-[#f4ecda] text-[#8c6731]'
                   : 'text-[#1e2025] hover:bg-[#efece4]'
               }`}
             >
               <span>Official Merch Store</span>
-              <span className="text-[10px] font-bold text-[#8c6731] bg-[#f4ecda] px-2 py-0.5 rounded border border-[#dcbfa2]">
-                Store
-              </span>
             </button>
             <button
               onClick={() => handleNavClick('contact')}
