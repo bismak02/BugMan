@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { BugManLogo } from './BugManLogo';
-import { Phone, ShoppingBag, Menu, X, ShieldCheck, Flame } from 'lucide-react';
+import { Phone, ShoppingBag, Menu, X, Flame } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: PageRoute;
@@ -28,22 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#faf8f5]/95 backdrop-blur-md border-b border-[#e8e2d5]">
-      {/* Top utility announcement banner matching the logo's dark charcoal & antique gold */}
-      <div className="bg-[#121316] text-[#e8e2d5] text-xs font-medium py-1.5 px-4 sm:px-6 border-b border-[#252830]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 text-[#c59b56]">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span className="font-semibold tracking-wide">MDA #: 34000</span>
-            </span>
-            <span className="text-slate-600 hidden sm:inline">|</span>
-            <span className="text-slate-300">
-              Inspections &amp; Estimates <strong className="text-white">Great Service!</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation Bar — 3-Zone Top Bar Contract */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
         {/* Zone 1: Brand Wordmark */}
