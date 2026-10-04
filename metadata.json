@@ -1,0 +1,6 @@
+{
+  "name": "BugMan Pest Control",
+  "description": "Official website for BugMan Pest Control in Salisbury, Princess Anne & Eastern Shore MD. Residential & commercial pest extermination, prevention services, free estimates, and official merch.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
