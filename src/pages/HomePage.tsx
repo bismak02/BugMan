@@ -508,11 +508,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                     {tip.description}
                   </p>
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-[#e8e2d5] flex items-center gap-1.5 text-[11px] text-[#8c6731] font-bold">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#c59b56]" />
-                  <span>Reduces pest intrusion risk by 60%+</span>
-                </div>
               </div>
             ))}
           </div>
@@ -525,7 +520,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5 relative">
               <img
-                src="/src/assets/images/bugman_merch_apparel_1791092757189.jpg"
+                src="/hoodie.jpg"
                 alt="BugMan official merch collection"
                 className="w-full h-80 object-cover rounded-2xl border border-[#393e4a] shadow-2xl"
               />
@@ -542,9 +537,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               <h2 className="text-3xl sm:text-4xl font-black font-heading uppercase text-white tracking-tight">
                 Gear Up with Official BugMan Merchandise
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
-                Show your pride with our vintage trucker hats, heavyweight 100% cotton tees, heavy field tech hoodies, and professional inspection gear tested and approved by our team.
-              </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button

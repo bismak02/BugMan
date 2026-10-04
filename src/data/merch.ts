@@ -24,7 +24,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     ],
     tag: 'Best Seller',
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'bug-hunter-tee',
@@ -49,7 +49,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     ],
     tag: 'Field Favorite',
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'technician-hoodie',
@@ -73,7 +73,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     ],
     tag: 'Staff Favorite',
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'tactical-uv-inspection-light',
@@ -93,7 +93,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     sizes: ['Standard 6"'],
     tag: 'Field Grade Tool',
     inStock: true,
-    image: '/src/assets/images/pest_inspection_detail_1791092766977.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'camp-mug-tumbler',
@@ -116,7 +116,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
       { name: 'Rescue Red', hex: '#dc2626' }
     ],
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'vinyl-sticker-pack',
@@ -134,7 +134,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     ],
     tag: 'Stocking Stuffer',
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'waxed-canvas-apron',
@@ -156,7 +156,7 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
       { name: 'Charcoal', hex: '#3f3f46' }
     ],
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   },
   {
     id: 'collector-enamel-pin',
@@ -174,6 +174,6 @@ export const MERCH_PRODUCTS: MerchProduct[] = [
     ],
     tag: 'Collector Edition',
     inStock: true,
-    image: '/src/assets/images/bugman_merch_apparel_1791092757189.jpg'
+    image: '/hoodie.jpg'
   }
 ];

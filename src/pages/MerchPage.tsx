@@ -83,7 +83,7 @@ export const MerchPage: React.FC<MerchPageProps> = ({ onAddToCart, onOpenCart })
       <section className="relative bg-[#121316] text-white overflow-hidden border-b border-[#252830]">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/bugman_merch_apparel_1791092757189.jpg"
+            src="/hoodie.jpg"
             alt="BugMan Official Merchandise"
             className="w-full h-full object-cover opacity-25 filter blur-[1px]"
           />
