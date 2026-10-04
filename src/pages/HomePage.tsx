@@ -28,10 +28,6 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal }) => {
-  // ZIP code search state
-  const [zipInput, setZipInput] = useState('');
-  const [zipResult, setZipResult] = useState<{ covered: boolean; city?: string } | null>(null);
-
   // Pest catalog filter & search
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [pestSearch, setPestSearch] = useState('');
@@ -39,35 +35,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
 
   // FAQ accordion active state
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  // Eastern Shore MD ZIP check
-  const handleZipCheck = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cleanZip = zipInput.trim();
-    const knownZips: Record<string, string> = {
-      '21801': 'Salisbury',
-      '21802': 'Salisbury',
-      '21804': 'Salisbury / Fruitland',
-      '21853': 'Princess Anne',
-      '21826': 'Fruitland',
-      '21875': 'Delmar',
-      '21811': 'Berlin',
-      '21842': 'Ocean City',
-      '21851': 'Pocomoke City',
-      '21817': 'Crisfield',
-      '21613': 'Cambridge',
-      '21863': 'Snow Hill',
-      '21830': 'Hebron'
-    };
-
-    if (cleanZip in knownZips) {
-      setZipResult({ covered: true, city: knownZips[cleanZip] });
-    } else if (cleanZip.startsWith('218') || cleanZip.startsWith('216')) {
-      setZipResult({ covered: true, city: 'Eastern Shore Region' });
-    } else {
-      setZipResult({ covered: false });
-    }
-  };
 
   const categories = ['All', 'Crawling', 'Stinging', 'Wood Destroying', 'Seasonal', 'Parasitic'];
 
@@ -95,188 +62,65 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Headlines & Primary Actions */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Trust Badge Kicker (Clean unboxed metadata in logo colors) */}
-              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-300">
-                <span className="text-[#c59b56] font-bold uppercase tracking-wider font-heading">
-                  BugMan Pest Control
-                </span>
-                <span aria-hidden="true" className="text-slate-600">·</span>
-                <span>Licensed MDA #34000</span>
-                <span aria-hidden="true" className="text-slate-600">·</span>
-                <span className="text-[#dcbfa2]">100% Guaranteed Results</span>
-              </div>
-
-              {/* Main Heading (Authentic copy) */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight uppercase leading-[1.05] text-white">
-                Local Experts,<br />
-                <span className="text-[#c59b56]">Guaranteed Results.</span>
-              </h1>
-
-              {/* Authentic Subtitle */}
-              <p className="text-lg sm:text-xl text-slate-300 font-medium max-w-xl leading-relaxed">
-                Get the best pest control when you need it. <strong className="text-white">Today!</strong> Professional, environmentally responsible extermination for Salisbury, Princess Anne, and the entire Eastern Shore.
-              </p>
-
-              {/* Action Buttons in Logo Color Scheme */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                <a
-                  href="tel:4106351055"
-                  className="px-7 py-4 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-xl text-base uppercase tracking-wider font-heading shadow-lg shadow-[#c59b56]/20 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-3"
-                >
-                  <Phone className="w-5 h-5 text-[#121316]" />
-                  <span>Call (410) 635-1055</span>
-                </a>
-
-                <button
-                  onClick={() => onOpenQuoteModal()}
-                  className="px-7 py-4 bg-[#1e2025]/90 hover:bg-[#2b2e36] text-white font-bold rounded-xl text-base uppercase tracking-wider font-heading border border-[#3b3f49] backdrop-blur-md transition-all flex items-center justify-center gap-2"
-                >
-                  <Calendar className="w-5 h-5 text-[#c59b56]" />
-                  <span>Request Free Inspection</span>
-                </button>
-              </div>
-
-              {/* Trust Indicators Checklist */}
-              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300 font-medium border-t border-[#252830]">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                  <span>Same-Day Response</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                  <span>Eco &amp; Pet Friendly</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                  <span>Certified Techs</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
-                  <span>No Long Contracts</span>
-                </div>
-              </div>
+          <div className="max-w-3xl space-y-6">
+            {/* Trust Badge Kicker (Clean unboxed metadata in logo colors) */}
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-300">
+              <span className="text-[#c59b56] font-bold uppercase tracking-wider font-heading">
+                BugMan Pest Control
+              </span>
+              <span aria-hidden="true" className="text-slate-600">·</span>
+              <span>Licensed MDA #34000</span>
+              <span aria-hidden="true" className="text-slate-600">·</span>
+              <span className="text-[#dcbfa2]">100% Guaranteed Results</span>
             </div>
 
-            {/* Right Column: Interactive ZIP Code & Service Area Checker */}
-            <div className="lg:col-span-5">
-              <div className="bg-[#1b1d22]/90 backdrop-blur-md border border-[#333742] p-6 sm:p-8 rounded-2xl shadow-2xl text-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#c59b56] flex items-center justify-center text-[#121316]">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold font-heading uppercase tracking-wide text-white">
-                      Check Your Service Area
-                    </h3>
-                    <p className="text-xs text-slate-400">
-                      Instant coverage check across Maryland's Eastern Shore
-                    </p>
-                  </div>
-                </div>
+            {/* Main Heading (Authentic copy) */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight uppercase leading-[1.05] text-white">
+              Local Experts,<br />
+              <span className="text-[#c59b56]">Guaranteed Results.</span>
+            </h1>
 
-                <form onSubmit={handleZipCheck} className="space-y-3">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      maxLength={5}
-                      value={zipInput}
-                      onChange={(e) => {
-                        setZipInput(e.target.value);
-                        setZipResult(null);
-                      }}
-                      placeholder="Enter 5-digit ZIP (e.g. 21801, 21853)"
-                      className="w-full px-4 py-3.5 bg-[#121316] border border-[#3b3f49] rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#c59b56] font-mono tracking-wider"
-                    />
-                    <button
-                      type="submit"
-                      className="absolute right-1.5 top-1.5 bottom-1.5 px-4 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading transition-colors"
-                    >
-                      Check Area
-                    </button>
-                  </div>
+            {/* Authentic Subtitle */}
+            <p className="text-lg sm:text-xl text-slate-300 font-medium max-w-xl leading-relaxed">
+              Get the best pest control when you need it. <strong className="text-white">Today!</strong> Professional, environmentally responsible extermination for Salisbury, Princess Anne, and the entire Eastern Shore.
+            </p>
 
-                  {zipResult && (
-                    <div
-                      className={`p-3.5 rounded-xl text-xs flex items-start gap-2.5 animate-in fade-in duration-200 ${
-                        zipResult.covered
-                          ? 'bg-[#1e231e] border border-emerald-600/40 text-emerald-200'
-                          : 'bg-[#2a1c1d] border border-red-700/40 text-red-200'
-                      }`}
-                    >
-                      {zipResult.covered ? (
-                        <>
-                          <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-bold text-white">
-                              Great news! BugMan serves {zipResult.city || 'your area'}.
-                            </p>
-                            <p className="text-[11px] text-emerald-300/90 mt-0.5">
-                              Certified technicians are stationed nearby for rapid same-day and 24-hr service.
-                            </p>
-                            <button
-                              type="button"
-                              onClick={() => onOpenQuoteModal()}
-                              className="mt-2 text-xs font-bold text-[#c59b56] underline hover:text-[#d4b27d]"
-                            >
-                              Book inspection for {zipInput} →
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                          <div>
-                            <p className="font-bold text-white">
-                              Direct ZIP lookup outside standard automated range.
-                            </p>
-                            <p className="text-[11px] text-amber-200 mt-0.5">
-                              We frequently service nearby custom properties. Call <a href="tel:4106351055" className="underline font-bold text-white">(410) 635-1055</a> directly for availability!
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </form>
+            {/* Action Buttons in Logo Color Scheme */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+              <a
+                href="tel:4106351055"
+                className="px-7 py-4 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-xl text-base uppercase tracking-wider font-heading shadow-lg shadow-[#c59b56]/20 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-3"
+              >
+                <Phone className="w-5 h-5 text-[#121316]" />
+                <span>Call (410) 635-1055</span>
+              </a>
 
-                <div className="mt-5 pt-4 border-t border-[#2d313b] text-xs text-slate-400 flex items-center justify-between">
-                  <span>Quick Area Shortcuts:</span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setZipInput('21801');
-                        setZipResult({ covered: true, city: 'Salisbury, MD' });
-                      }}
-                      className="px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-[11px] font-mono transition-colors text-slate-200"
-                    >
-                      21801
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setZipInput('21853');
-                        setZipResult({ covered: true, city: 'Princess Anne, MD' });
-                      }}
-                      className="px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-[11px] font-mono transition-colors text-slate-200"
-                    >
-                      21853
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setZipInput('21826');
-                        setZipResult({ covered: true, city: 'Fruitland, MD' });
-                      }}
-                      className="px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-[11px] font-mono transition-colors text-slate-200"
-                    >
-                      21826
-                    </button>
-                  </div>
-                </div>
+              <button
+                onClick={() => onOpenQuoteModal()}
+                className="px-7 py-4 bg-[#1e2025]/90 hover:bg-[#2b2e36] text-white font-bold rounded-xl text-base uppercase tracking-wider font-heading border border-[#3b3f49] backdrop-blur-md transition-all flex items-center justify-center gap-2"
+              >
+                <Calendar className="w-5 h-5 text-[#c59b56]" />
+                <span>Request Free Inspection</span>
+              </button>
+            </div>
+
+            {/* Trust Indicators Checklist */}
+            <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-slate-300 font-medium border-t border-[#252830]">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
+                <span>Same-Day Response</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
+                <span>Eco &amp; Pet Friendly</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
+                <span>Certified Techs</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-[#c59b56] shrink-0" />
+                <span>No Long Contracts</span>
               </div>
             </div>
           </div>
