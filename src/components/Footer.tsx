@@ -159,18 +159,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
                   <span>Contact &amp; Schedule Inspection</span>
                 </button>
               </li>
-              <li>
-                <a
-                  href={googleReviewUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#c59b56] transition-colors flex items-center gap-1.5 text-amber-400"
-                >
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span>Google Reviews</span>
-                  <ExternalLink className="w-3 h-3 opacity-70 ml-0.5" />
-                </a>
-              </li>
             </ul>
           </div>
 
