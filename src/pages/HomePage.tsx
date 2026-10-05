@@ -52,12 +52,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         {/* Background Image with Scrim Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_pest_technician_1791092747288.jpg"
+            src="/background.jpg"
             alt="BugMan certified pest technician inspecting home exterior"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center opacity-30 filter contrast-105"
+            className="w-full h-full object-cover object-center opacity-35 filter contrast-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#121316] via-[#121316]/90 to-[#121316]/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#121316] via-[#121316]/85 to-[#121316]/70" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#121316] via-transparent to-transparent" />
         </div>
 
@@ -514,7 +514,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
       </section>
 
-      {/* ===================== FEATURED OFFICIAL MERCH TEASER ===================== */}
+      {/* ===================== FEATURED OFFICIAL MERCH TEASER (Temporarily hidden, code preserved) ===================== */}
+      {/*
       <section className="py-16 bg-[#17181d] text-white border-b border-[#252830]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -550,6 +551,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
           </div>
         </div>
       </section>
+      */}
 
       {/* ===================== FAQ ACCORDION ===================== */}
       <section className="py-20 bg-[#faf8f5] border-b border-[#e8e2d5]">

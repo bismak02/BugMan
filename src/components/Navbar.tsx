@@ -74,6 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
+          {/* Merch Store link preserved for later:
           <button
             onClick={() => handleNavClick('merch')}
             className={`transition-colors py-1 relative whitespace-nowrap ${
@@ -87,6 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c59b56] rounded-full" />
             )}
           </button>
+          */}
 
           <button
             onClick={() => handleNavClick('contact')}
@@ -105,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Zone 3: Primary Actions */}
         <div className="flex items-center gap-3">
-          {/* Shopping Bag trigger */}
+          {/* Shopping Bag trigger preserved for later:
           <button
             onClick={onOpenCart}
             className="relative p-2.5 text-[#1e2025] hover:text-[#c59b56] hover:bg-[#efece4] rounded-lg transition-colors focus-visible:outline-2 focus-visible:outline-[#c59b56]"
@@ -117,6 +119,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {cartCount}
               </span>
             )}
+          </button>
+          */}
+
+          <a
+            href="tel:4106351055"
+            className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 bg-[#f4ecda] hover:bg-[#e8dec7] text-[#8c6731] font-bold rounded-lg text-xs font-heading transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            <span>(410) 635-1055</span>
+          </a>
+
+          <button
+            onClick={onOpenQuoteModal}
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading shadow-xs transition-colors"
+          >
+            <span>Get Free Quote</span>
           </button>
 
           {/* Mobile hamburger */}
@@ -158,6 +176,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 $1 Deal
               </span>
             </button>
+            {/* Merch Store mobile link preserved for later:
             <button
               onClick={() => handleNavClick('merch')}
               className={`text-left px-3 py-2 text-base font-semibold rounded-lg ${
@@ -168,6 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <span>Official Merch Store</span>
             </button>
+            */}
             <button
               onClick={() => handleNavClick('contact')}
               className={`text-left px-3 py-2 text-base font-semibold rounded-lg ${

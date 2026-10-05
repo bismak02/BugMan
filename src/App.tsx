@@ -35,7 +35,9 @@ export default function App() {
   }, [cartItems]);
 
   const handleNavigate = (page: PageRoute, hash?: string) => {
-    setCurrentPage(page);
+    // If merch is requested while hidden, default to home
+    const targetPage = page === 'merch' ? 'home' : page;
+    setCurrentPage(targetPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (hash) {
       setTimeout(() => {
