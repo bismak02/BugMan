@@ -416,25 +416,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
             {filteredPests.map((pest) => (
               <div
                 key={pest.id}
-                onClick={() => setSelectedPestModal(pest)}
-                className="bg-white p-4 rounded-xl border border-[#e8e2d5] hover:border-[#c59b56] hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
+                className="bg-white p-4 rounded-xl border border-[#e8e2d5] flex flex-col justify-between shadow-xs"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-1 text-[11px] font-medium text-slate-500 mb-1">
-                    <span>{pest.category}</span>
-                    <span
-                      className={`font-semibold ${
-                        pest.dangerLevel === 'Severe'
-                          ? 'text-red-700'
-                          : pest.dangerLevel === 'High'
-                          ? 'text-[#8c6731]'
-                          : 'text-slate-500'
-                      }`}
-                    >
-                      {pest.dangerLevel}
-                    </span>
+                  <div className="text-[11px] font-semibold text-[#8c6731] uppercase tracking-wider mb-1">
+                    {pest.category}
                   </div>
-                  <h4 className="text-base font-bold font-heading uppercase text-[#121316] group-hover:text-[#8c6731] transition-colors">
+                  <h4 className="text-base font-bold font-heading uppercase text-[#121316]">
                     {pest.name}
                   </h4>
                 </div>
