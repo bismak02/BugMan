@@ -88,7 +88,7 @@ export const PromoPage: React.FC<PromoPageProps> = ({ onOpenQuoteModal }) => {
     `Hello BugMan Pest Control,\n\nI have claimed the October $1 First Treatment Monthly Special on your website!\n\nVoucher Code: ${claimCode}\nName: ${claimForm.name}\nPhone: ${claimForm.phone}\nEmail: ${claimForm.email}\nAddress: ${claimForm.address}, ZIP: ${claimForm.zip}\nProperty Type: ${claimForm.propertyType}\n\nPlease call me to schedule my initial inspection!\n\nThank you!`
   );
 
-  const facebookUrl = 'https://www.facebook.com/profile.php?id=61577192401199&sk=followers';
+  const facebookUrl = 'https://www.facebook.com/people/BugMan-Pest-Control/61577192401199/';
 
   return (
     <div className="bg-[#faf8f5] min-h-screen pb-24">

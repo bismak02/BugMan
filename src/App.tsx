@@ -49,9 +49,8 @@ export default function App() {
     }
   };
 
-  const handleOpenQuoteModal = (defaultPest?: string) => {
-    setQuoteDefaultPest(defaultPest || '');
-    setQuoteModalOpen(true);
+  const handleOpenQuoteModal = (_defaultPest?: string) => {
+    handleNavigate('contact');
   };
 
   const handleAddToCart = (product: MerchProduct, size?: string, color?: string, qty: number = 1) => {

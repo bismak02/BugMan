@@ -131,10 +131,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           <button
-            onClick={onOpenQuoteModal}
+            onClick={() => handleNavClick('contact')}
             className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#c59b56] hover:bg-[#b88b4a] text-[#121316] font-black rounded-lg text-xs uppercase tracking-wider font-heading shadow-xs transition-colors"
           >
-            <span>Get Free Quote</span>
+            <span>Get a Free Quote</span>
           </button>
 
           {/* Mobile hamburger */}

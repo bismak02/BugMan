@@ -9,7 +9,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) => {
-  const facebookUrl = 'https://www.facebook.com/profile.php?id=61577192401199&sk=followers';
+  const facebookUrl = 'https://www.facebook.com/people/BugMan-Pest-Control/61577192401199/';
   const googleReviewUrl = 'https://share.google/nqMWTQyDyHfQve8LI';
 
   return (
