@@ -132,6 +132,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
                   <span>Home</span>
                 </button>
               </li>
+              {/* Monthly Promo link preserved for later:
               <li>
                 <button
                   onClick={() => onNavigate('promo')}
@@ -141,6 +142,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenQuoteModal }) 
                   <span>Monthly Promo ($1 Deal)</span>
                 </button>
               </li>
+              */}
               {/* Merch Store link preserved for later:
               <li>
                 <button

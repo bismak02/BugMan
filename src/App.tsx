@@ -35,8 +35,8 @@ export default function App() {
   }, [cartItems]);
 
   const handleNavigate = (page: PageRoute, hash?: string) => {
-    // If merch is requested while hidden, default to home
-    const targetPage = page === 'merch' ? 'home' : page;
+    // If hidden pages (merch, promo) are requested, default to home
+    const targetPage = (page === 'merch' || page === 'promo') ? 'home' : page;
     setCurrentPage(targetPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (hash) {
@@ -148,9 +148,11 @@ export default function App() {
           />
         )}
 
+        {/* PromoPage preserved for later:
         {currentPage === 'promo' && (
           <PromoPage onOpenQuoteModal={handleOpenQuoteModal} />
         )}
+        */}
 
         {currentPage === 'merch' && (
           <MerchPage

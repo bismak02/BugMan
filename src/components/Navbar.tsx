@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Monthly Promo Link (Requested by user) */}
+          {/* Monthly Promo Link preserved for later:
           <button
             onClick={() => handleNavClick('promo')}
             className={`transition-colors py-1 relative whitespace-nowrap flex items-center gap-1.5 ${
@@ -73,6 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c59b56] rounded-full" />
             )}
           </button>
+          */}
 
           {/* Merch Store link preserved for later:
           <button
@@ -163,6 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               Home
             </button>
+            {/* Monthly Promo mobile link preserved for later:
             <button
               onClick={() => handleNavClick('promo')}
               className={`text-left px-3 py-2 text-base font-semibold rounded-lg flex items-center justify-between ${
@@ -176,6 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 $1 Deal
               </span>
             </button>
+            */}
             {/* Merch Store mobile link preserved for later:
             <button
               onClick={() => handleNavClick('merch')}

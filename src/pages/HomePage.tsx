@@ -181,16 +181,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
         </div>
       </section>
 
-      {/* ===================== MONTHLY PROMO SECTION ===================== */}
-      {/* Features the user's created October flyer, $1 deal, and Facebook connection */}
+      {/* ===================== MONTHLY PROMO SECTION (Temporarily hidden, code preserved) ===================== */}
+      {/*
       <section className="py-16 md:py-20 bg-[#121316] text-white border-b border-[#252830] relative overflow-hidden">
-        {/* Ambient Halloween ambient glow */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#c59b56]/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* Left: Attached Flyer Preview Card */}
             <div className="lg:col-span-5 flex justify-center">
               <div
                 onClick={() => onNavigate('promo')}
@@ -220,7 +218,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
               </div>
             </div>
 
-            {/* Right: Deal Details, Value Points & Facebook Link */}
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#252830] border border-[#c59b56]/50 rounded-full text-xs font-bold text-[#c59b56] uppercase tracking-wider mb-3 font-heading">
@@ -245,7 +242,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </p>
               </div>
 
-              {/* 4 Pillars from the flyer */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-2 border-y border-[#2d313b]">
                 <div className="text-center sm:text-left">
                   <div className="text-xs font-bold font-heading uppercase text-white">Year-Round</div>
@@ -265,7 +261,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
                 </div>
               </div>
 
-              {/* Action Button */}
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <button
                   onClick={() => onNavigate('promo')}
@@ -278,6 +273,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenQuoteModal
           </div>
         </div>
       </section>
+      */}
 
       {/* ===================== ABOUT US & WHY CHOOSE US ===================== */}
       <section className="py-20 bg-white border-b border-[#e8e2d5]">
